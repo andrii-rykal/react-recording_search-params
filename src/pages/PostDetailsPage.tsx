@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { Post } from '../types';
 import { getPost } from '../services/post';
@@ -21,9 +21,10 @@ export const PostDetailsPage = () => {
   const { postId } = useParams();
   const normalizedPostId = postId ? +postId : 0;
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   function goBack() {
-    navigate('..')
+    navigate({ pathname: '..', search: state?.search })
   }
 
   useEffect(() => {
